@@ -242,6 +242,17 @@ void QmlMainWindow::setVideoPreset(VideoPreset preset)
     emit videoPresetChanged();
 }
 
+QmlMainWindow::ControllerMode QmlMainWindow::controllerMode() const
+{
+    return controller_mode;
+}
+
+void QmlMainWindow::setControllerMode(ControllerMode mode)
+{
+    controller_mode = mode;
+    emit controllerModeChanged();
+}
+
 void QmlMainWindow::setSettings(Settings *new_settings)
 {
     settings = new_settings;
@@ -282,6 +293,7 @@ void QmlMainWindow::show()
 
 void QmlMainWindow::presentFrame(AVFrame *frame, int32_t frames_lost)
 {
+    if (this->controllerModeOn) return;
     frame_mutex.lock();
     if (av_frame) {
         qCDebug(chiakiGui) << "Dropping rendering frame";
@@ -490,6 +502,7 @@ void QmlMainWindow::init(Settings *settings)
 
     backend = new QmlBackend(settings, this);
     connect(backend, &QmlBackend::sessionChanged, this, [this](StreamSession *s) {
+        if this->controllerModeOn return;
         session = s;
         grab_input = 0;
         if (has_video) {
@@ -749,7 +762,7 @@ void QmlMainWindow::render()
 
     render_scheduled = false;
 
-    if (!placebo_swapchain)
+    if (!placebo_swapchain || controller_mode)
         return;
 
     AVFrame *frame = nullptr;

@@ -43,6 +43,7 @@ class QmlSettings : public QObject
     Q_PROPERTY(int windowType READ windowType WRITE setWindowType NOTIFY windowTypeChanged)
     Q_PROPERTY(int videoPreset READ videoPreset WRITE setVideoPreset NOTIFY videoPresetChanged)
     Q_PROPERTY(float sZoomFactor READ sZoomFactor WRITE setSZoomFactor NOTIFY sZoomFactorChanged)
+    Q_PROPERTY(int controllerMode READ controllerMode WRITE setControllerMode NOTIFY controllerModeChanged)
     Q_PROPERTY(int packetLossMax READ packetLossMax WRITE setPacketLossMax NOTIFY packetLossMaxChanged)
     Q_PROPERTY(QString autoConnectMac READ autoConnectMac WRITE setAutoConnectMac NOTIFY autoConnectMacChanged)
     Q_PROPERTY(QString logDirectory READ logDirectory CONSTANT)
@@ -221,6 +222,9 @@ public:
 
     int videoPreset() const;
     void setVideoPreset(int preset);
+
+    int controllerMode() const;
+    void setControllerMode(int mode);
 
     QString autoConnectMac() const;
     void setAutoConnectMac(const QString &mac);
@@ -502,6 +506,7 @@ signals:
     void packetLossMaxChanged();
     void currentProfileChanged();
     void profilesChanged();
+    void controllerModeChanged();
     void placeboUpscalerChanged();
     void placeboPlaneUpscalerChanged();
     void placeboDownscalerChanged();

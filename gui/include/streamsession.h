@@ -83,6 +83,7 @@ struct StreamSessionConnectInfo
 	bool fullscreen;
 	bool zoom;
 	bool stretch;
+	bool controller_mode;
 	bool enable_keyboard;
 	bool enable_dualsense;
 	RumbleHapticsIntensity rumble_haptics_intensity;
@@ -112,7 +113,9 @@ struct StreamSessionConnectInfo
 			QString duid,
 			bool fullscreen,
 			bool zoom,
-			bool stretch);
+			bool stretch,
+			bool video,
+			bool controller_mode);
 };
 
 struct MicBuf

@@ -144,6 +144,9 @@ int real_main(int argc, char *argv[])
 	QCommandLineOption stretch_option("stretch", "Start window in fullscreen stretched to fit screen [distorts aspect ratio to fill screen] (only for use with stream command).");
 	parser.addOption(stretch_option);
 
+	QCommandLineOption controller_mode_option("controllermode", "Start window without video stream to. Only send button inputs");
+	parser.addOption(controller_mode_option);
+
 	QCommandLineOption passcode_option("passcode", "Automatically send your PlayStation login passcode (only affects users with a login passcode set on their PlayStation console).", "passcode");
 	parser.addOption(passcode_option);
 
@@ -256,7 +259,8 @@ int real_main(int argc, char *argv[])
 				QString(),
 				parser.isSet(fullscreen_option),
 				parser.isSet(zoom_option),
-				parser.isSet(stretch_option));
+				parser.isSet(stretch_option),
+				parser.isSet(controller_mode_option));
 
 		return RunStream(app, connect_info);
 	}

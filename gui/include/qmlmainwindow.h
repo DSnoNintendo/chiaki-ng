@@ -44,6 +44,7 @@ class QmlMainWindow : public QWindow
     Q_PROPERTY(VideoMode videoMode READ videoMode WRITE setVideoMode NOTIFY videoModeChanged)
     Q_PROPERTY(float ZoomFactor READ zoomFactor WRITE setZoomFactor NOTIFY zoomFactorChanged)
     Q_PROPERTY(VideoPreset videoPreset READ videoPreset WRITE setVideoPreset NOTIFY videoPresetChanged)
+    Q_PROPERTY(bool controllerMode READ controllerModeOn NOTIFY controllerModeChanged)
 
 public:
     enum class VideoMode {
@@ -60,6 +61,12 @@ public:
         Custom
     };
     Q_ENUM(VideoPreset);
+
+    enum class ControllerMode {
+        On,
+        Off
+    };
+    Q_ENUM(ControllerMode);
 
     QmlMainWindow(Settings *settings);
     QmlMainWindow(const StreamSessionConnectInfo &connect_info);
@@ -82,6 +89,9 @@ public:
     VideoPreset videoPreset() const;
     void setVideoPreset(VideoPreset mode);
 
+    ControllerMode controllerModeOn() const;
+    void setControllerMode(ControllerMode mode);
+
     Q_INVOKABLE void grabInput();
     Q_INVOKABLE void releaseInput();
     Q_INVOKABLE void updatePlacebo();
@@ -99,6 +109,7 @@ signals:
     void zoomFactorChanged();
     void videoPresetChanged();
     void menuRequested();
+    void controllerModeChanged();
 
 private:
     void init(Settings *settings);
@@ -124,6 +135,7 @@ private:
     VideoMode video_mode = VideoMode::Normal;
     float zoom_factor = 0;
     VideoPreset video_preset = VideoPreset::HighQuality;
+    ControllerMode controller_mode = ControllerMode::Off;
     Settings *settings = {};
 
     QmlBackend *backend = {};

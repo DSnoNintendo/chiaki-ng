@@ -71,7 +71,9 @@ StreamSessionConnectInfo::StreamSessionConnectInfo(
 		QString duid,
 		bool fullscreen, 
 		bool zoom, 
-		bool stretch)
+		bool stretch,
+		bool video,
+		bool controller_mode)
 	: settings(settings)
 {
 	key_map = settings->GetControllerMappingForDecoding();
@@ -97,6 +99,7 @@ StreamSessionConnectInfo::StreamSessionConnectInfo(
 	this->fullscreen = fullscreen;
 	this->zoom = zoom;
 	this->stretch = stretch;
+	this->controller_mode = controller_mode;
 	this->enable_keyboard = false; // TODO: from settings
 	this->enable_dualsense = true;
 	this->rumble_haptics_intensity = settings->GetRumbleHapticsIntensity();

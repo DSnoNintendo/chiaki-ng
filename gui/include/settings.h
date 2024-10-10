@@ -168,6 +168,12 @@ enum class PlaceboToneMappingMetadata {
 	Hdr10Plus,
 	CieY
 };
+
+enum class PlaceboControllerModeMetadata {
+	On,
+	Off
+};
+
 class Settings : public QObject
 {
 	Q_OBJECT

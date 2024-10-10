@@ -365,6 +365,18 @@ DialogView {
                         Material.roundedScale: Material.SmallScale
                         visible: Chiaki.window.videoPreset == ChiakiWindow.VideoPreset.Custom
                     }
+
+                    Label {
+                        Layout.alignment: Qt.AlignRight
+                        text: qsTr("Controller Mode:")
+                    }
+
+                    C.ComboBox {
+                        Layout.preferredWidth: 400
+                        model: model: [qsTr("On"), qsTr("Off")]
+                        currentIndex: Chiaki.settings.ControllerMode
+                        onActivated: (index) => Chiaki.settings.decoder = index ? model[index] : ""
+                    }
                 }
             }
 

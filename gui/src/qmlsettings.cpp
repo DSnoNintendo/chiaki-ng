@@ -414,6 +414,17 @@ void QmlSettings::setVideoPreset(int preset)
     emit videoPresetChanged();
 }
 
+int QmlSettings::ControllerMode() const
+{
+    return static_cast<int>(settings->GetPlaceboPreset());
+}
+
+void QmlSettings::setControllerMode(int preset)
+{
+    settings->SetControllerMode(static_cast<PlaceboPreset>(preset));
+    emit setControllerMode();
+}
+
 QString QmlSettings::autoConnectMac() const
 {
     return settings->GetAutoConnectHost().GetServerMAC().ToString();
